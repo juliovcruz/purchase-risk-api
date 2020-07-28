@@ -25,6 +25,7 @@
     "test": "jest --passWithNoTests --silent --runInBand --noStackTrace",
     "test:full": "jest --passWithNoTests --runInBand",
     "test:unit": "yarn test -- --watch -c jest-unit-config.js",
+    "test:staged": "yarn test -- --findRelatedTests",
     "test:integration": "yarn test -- --watch -c jest-integration-config.js",
     "test:ci": "yarn test -- --coverage",
     "build": "sucrase-node src/main/server.ts"
