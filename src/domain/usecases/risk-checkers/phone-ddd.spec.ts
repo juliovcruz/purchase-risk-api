@@ -51,4 +51,11 @@ describe('PhoneDDD Checker', () => {
     const result = sut.verifyRisk(transaction)
     expect(result).toBe(sut.levelRisk[2])
   })
+  test('Should return levelRisk 5 if phone DDD is invalid', () => {
+    const sut = makeSut()
+    const transaction = makeFakeTransaction()
+    transaction.customer.phone = '0 99999-9999'
+    const result = sut.verifyRisk(transaction)
+    expect(result).toBe(sut.levelRisk[5])
+  })
 })
