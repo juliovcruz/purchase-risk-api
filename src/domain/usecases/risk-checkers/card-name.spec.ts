@@ -37,4 +37,12 @@ describe('CardName Checker', () => {
     const result = sut.verifyRisk(transaction)
     expect(result).toBe(sut.levelRisk[0])
   })
+  test('Should return levelRisk 4 if card name and customer name is different', () => {
+    const sut = makeSut()
+    const transaction = makeFakeTransaction()
+    transaction.card_hold_name = 'any_name'
+    transaction.customer.name = 'another_name'
+    const result = sut.verifyRisk(transaction)
+    expect(result).toBe(sut.levelRisk[4])
+  })
 })
