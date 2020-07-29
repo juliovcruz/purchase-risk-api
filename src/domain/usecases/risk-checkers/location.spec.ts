@@ -1,13 +1,13 @@
-import { IpStateLocationChecker } from './ip-state-location'
-import { TransactionModel } from '../../../domain/models/transaction'
-import { CustomerModel } from '../../../domain/models/customer'
+import { LocationChecker } from './location'
+import { TransactionModel } from '../../models/transaction'
+import { CustomerModel } from '../../models/customer'
 
 const makeFakeCustomer = (): CustomerModel => {
   return {
     id: 'any_id',
     name: 'any_name',
     birth_date: 'any_birth_date',
-    state: 'any_location',
+    state: 'RJ/BR',
     phone: 'any_phone'
   }
 }
@@ -17,19 +17,19 @@ const makeFakeTransaction = (): TransactionModel => {
     id: 'any_id',
     value: 10,
     paid_at: 'any_date',
-    ip_location: 'any_location',
+    ip_location: 'RJ/BR',
     card_hold_name: 'any_card_hold_name',
     customer: makeFakeCustomer()
   }
 }
 
-const makeSut = (): IpStateLocationChecker => {
-  const levelRisk = [0, 1, 2, 3, 4]
-  return new IpStateLocationChecker(levelRisk)
+const makeSut = (): LocationChecker => {
+  const levelRisk = [0, 1, 2, 3, 4, 5]
+  return new LocationChecker(levelRisk)
 }
 
-describe('IpStateLocation Checker', () => {
-  test('Should return 0 if ipLocation and state is equal', () => {
+describe('Location Checker', () => {
+  test('Should return levelRisk 0 if location and state is equal', () => {
     const sut = makeSut()
     const transaction = makeFakeTransaction()
     const result = sut.verifyRisk(transaction)

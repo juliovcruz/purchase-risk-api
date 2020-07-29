@@ -1,7 +1,7 @@
 import { RiskChecker } from '../protocols/risk-checker'
-import { TransactionModel } from '../../../domain/models/transaction'
+import { TransactionModel } from '../../models/transaction'
 
-export class IpStateLocationChecker implements RiskChecker {
+export class LocationChecker implements RiskChecker {
   levelRisk: number[]
 
   constructor (values: number[]) {
