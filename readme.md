@@ -28,7 +28,19 @@ Resposta da API:
 [
     {
         "id": "875623",
-        score: "5"
+        "score": "5"
     }
 ]
 ```
+
+## Como iniciar o projeto
+
+Para iniciar o projeto em localhost é necessário o Gerenciador de Pacotes [**Yarn**](https://yarnpkg.com/) 
+Depois, basta seguir o passo a passo em ordem:
+1. Clone o repositório utilizando o comando:
+``git clone https://github.com/juliovcruz/purchase-risk-api.git``
+2. Abra a pasta do projeto
+3. Para instalar as dependências do projeto utilize o comando:
+`yarn`
+4. Para compilar o projeto de produção utilize o comando:
+`yarn build`
