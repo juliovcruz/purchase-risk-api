@@ -1,7 +1,7 @@
 import { RiskChecker } from '../protocols/risk-checker'
 import { TransactionModel } from '../../models/transaction'
 
-export class PhoneChecker implements RiskChecker {
+export class PhoneDDDChecker implements RiskChecker {
   levelRisk: number[]
 
   constructor (levelRisk: number[]) {
