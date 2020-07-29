@@ -24,7 +24,8 @@ const makeFakeTransaction = (): TransactionModel => {
 }
 
 const makeSut = (): IpStateLocationChecker => {
-  return new IpStateLocationChecker()
+  const levelRisk = [0, 1, 2, 3, 4]
+  return new IpStateLocationChecker(levelRisk)
 }
 
 describe('IpStateLocation Checker', () => {
@@ -32,6 +33,6 @@ describe('IpStateLocation Checker', () => {
     const sut = makeSut()
     const transaction = makeFakeTransaction()
     const result = sut.verifyRisk(transaction)
-    expect(result).toBe(0)
+    expect(result).toBe(sut.levelRisk[0])
   })
 })
