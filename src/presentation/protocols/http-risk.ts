@@ -1,7 +1,9 @@
+interface RiskBody {
+  id: string
+  score: number
+}
+
 export interface HttpResponseRisk {
   statusCode: number
-  body: {
-    id: string
-    score: number
-  }
+  body: RiskBody[]
 }

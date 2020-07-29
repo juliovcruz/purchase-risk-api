@@ -1,4 +1,4 @@
-import { TransactionModel } from '../../domain/models/transaction'
+import { TransactionModel } from '../../models/transaction'
 
 export interface RiskChecker {
   verifyRisk: (transaction: TransactionModel) => number

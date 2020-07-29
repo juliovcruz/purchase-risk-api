@@ -1,6 +1,6 @@
 import { IpStateLocationChecker } from './ip-state-location'
-import { TransactionModel } from '../../domain/models/transaction'
-import { CustomerModel } from '../../domain/models/customer'
+import { TransactionModel } from '../../../domain/models/transaction'
+import { CustomerModel } from '../../../domain/models/customer'
 
 const makeFakeCustomer = (): CustomerModel => {
   return {
