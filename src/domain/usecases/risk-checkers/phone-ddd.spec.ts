@@ -35,4 +35,11 @@ describe('PhoneDDD Checker', () => {
     const result = sut.verifyRisk(transaction)
     expect(result).toBe(sut.levelRisk[0])
   })
+  test('Should return levelRisk 2 if phone DDD is not compatible with consumer location', () => {
+    const sut = makeSut()
+    const transaction = makeFakeTransaction()
+    transaction.customer.phone = '62 99999-9999'
+    const result = sut.verifyRisk(transaction)
+    expect(result).toBe(sut.levelRisk[2])
+  })
 })
