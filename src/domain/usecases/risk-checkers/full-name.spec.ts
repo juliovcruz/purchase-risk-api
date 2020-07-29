@@ -10,7 +10,7 @@ const makeSut = (): FullNameChecker => {
 const makeFakeCustomer = (): CustomerModel => {
   return {
     id: 'any_id',
-    name: 'any_name',
+    name: 'Ashlee Swanson',
     birth_date: 'any_birth_date',
     state: 'RJ/BR',
     phone: 'any_phone'
@@ -23,7 +23,7 @@ const makeFakeTransaction = (): TransactionModel => {
     value: 10,
     paid_at: 'any_date',
     ip_location: 'RJ/BR',
-    card_hold_name: 'any_card_hold_name',
+    card_hold_name: 'Ashlee Swanson',
     customer: makeFakeCustomer()
   }
 }
@@ -34,5 +34,19 @@ describe('FullName Checker', () => {
     const transaction = makeFakeTransaction()
     const result = sut.verifyRisk(transaction)
     expect(result).toBe(sut.levelRisk[0])
+  })
+  test('Should return levelRisk 3 if only first name is provided in transaction', () => {
+    const sut = makeSut()
+    const transaction = makeFakeTransaction()
+    transaction.card_hold_name = 'Ashlee'
+    const result = sut.verifyRisk(transaction)
+    expect(result).toBe(sut.levelRisk[3])
+  })
+  test('Should return levelRisk 3 if only first name is provided in customer', () => {
+    const sut = makeSut()
+    const transaction = makeFakeTransaction()
+    transaction.customer.name = 'Ashlee '
+    const result = sut.verifyRisk(transaction)
+    expect(result).toBe(sut.levelRisk[3])
   })
 })
