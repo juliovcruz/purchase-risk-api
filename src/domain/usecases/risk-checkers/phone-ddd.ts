@@ -4,7 +4,7 @@ import { TransactionModel } from '../../models/transaction'
 export class PhoneDDDChecker implements RiskChecker {
   levelRisk: number[]
 
-  stateDDD (ddd: number): string {
+  verifyStateDDD (ddd: number): string {
     if (ddd >= 11 && ddd <= 19) return 'SP'
     if (ddd >= 21 && ddd <= 24) return 'RJ'
     if (ddd >= 27 && ddd <= 28) return 'ES'
@@ -35,7 +35,7 @@ export class PhoneDDDChecker implements RiskChecker {
     if (ddd >= 96 && ddd <= 96) return 'AP'
     if (ddd >= 97 && ddd <= 97) return 'AM'
     if (ddd >= 98 && ddd <= 99) return 'MA'
-    return '__'
+    return null
   }
 
   constructor (levelRisk: number[]) {
@@ -44,10 +44,11 @@ export class PhoneDDDChecker implements RiskChecker {
 
   verifyRisk (transaction: TransactionModel): number {
     const stateTransaction = transaction.ip_location.split('/')[0]
-    const stateConstumer = transaction.customer.state.split('/')[0]
+    const stateCostumer = transaction.customer.state.split('/')[0]
     const phoneDDD = Number(transaction.customer.phone.split(' ')[0])
-    if (this.stateDDD(phoneDDD) !== stateConstumer) return this.levelRisk[2]
-    console.log(phoneDDD, stateTransaction, stateConstumer)
+    const stateDDD = this.verifyStateDDD(phoneDDD)
+    if (stateDDD !== stateCostumer) return this.levelRisk[2]
+    if (stateDDD !== stateTransaction) return this.levelRisk[2]
     return this.levelRisk[0]
   }
 }
