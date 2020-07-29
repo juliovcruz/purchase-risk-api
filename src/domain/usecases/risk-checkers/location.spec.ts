@@ -35,4 +35,11 @@ describe('Location Checker', () => {
     const result = sut.verifyRisk(transaction)
     expect(result).toBe(sut.levelRisk[0])
   })
+  test('Should return levelRisk 5 if country is different', () => {
+    const sut = makeSut()
+    const transaction = makeFakeTransaction()
+    transaction.customer.state = 'RJ/US'
+    const result = sut.verifyRisk(transaction)
+    expect(result).toBe(sut.levelRisk[5])
+  })
 })
