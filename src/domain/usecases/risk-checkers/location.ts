@@ -9,6 +9,10 @@ export class LocationChecker implements RiskChecker {
   }
 
   verifyRisk (transaction: TransactionModel): number {
+    const [stateTransaction, countryTransaction] = transaction.ip_location.split('/')
+    const [stateConstumer, countryConsumer] = transaction.customer.state.split('/')
+    console.log(stateConstumer, stateTransaction, countryTransaction, countryConsumer)
     if (transaction.ip_location === transaction.customer.state) return this.levelRisk[0]
+    if (countryTransaction !== countryConsumer) return this.levelRisk[5]
   }
 }
