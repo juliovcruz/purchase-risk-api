@@ -1,4 +1,4 @@
-interface RiskBody {
+export interface RiskBody {
   id: string
   score: number
 }
