@@ -15,6 +15,7 @@ export class RiskCheckerComposite implements RiskChecker {
       const checkerRisk = checker.verifyRisk(transaction)
       scoreRisk += checkerRisk
     }
+    if (scoreRisk > 100) scoreRisk = 100
     return scoreRisk
   }
 }
