@@ -9,17 +9,20 @@ import { HttpRequest } from '../protocols/http'
 interface SutTypes {
   sut: TransactionRiskController
   riskCheckerStub: RiskChecker
-  validationStub: Validation
+  validationCustomerStub: Validation
+  validationTransactionStub: Validation
 }
 
 const makeSut = (): SutTypes => {
   const riskCheckerStub = makeRiskCheckerStub()
-  const validationStub = makeValidationStub()
-  const sut = new TransactionRiskController(riskCheckerStub, validationStub)
+  const validationCustomerStub = makeValidationStub()
+  const validationTransactionStub = makeValidationStub()
+  const sut = new TransactionRiskController(riskCheckerStub, validationCustomerStub, validationTransactionStub)
   return {
     sut,
     riskCheckerStub,
-    validationStub
+    validationCustomerStub,
+    validationTransactionStub
   }
 }
 

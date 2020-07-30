@@ -7,11 +7,13 @@ import { RiskBody } from '../../domain/usecases/protocols/http-risk'
 
 export class TransactionRiskController implements Controller {
   private readonly riskChecker: RiskChecker
-  private readonly validation: Validation
+  private readonly validationCustomer: Validation
+  private readonly validationTransaction: Validation
 
-  constructor (riskChecker: RiskChecker, validation: Validation) {
+  constructor (riskChecker: RiskChecker, validationCustomer: Validation, validationTransaction: Validation) {
     this.riskChecker = riskChecker
-    this.validation = validation
+    this.validationCustomer = validationCustomer
+    this.validationTransaction = validationTransaction
   }
 
   handle (transactions: HttpRequest): HttpResponse {
