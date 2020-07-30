@@ -61,4 +61,10 @@ describe('RiskChecker Composite', () => {
     const result = sut.verifyRisk(makeFakeTransaction())
     expect(result).toBe(0)
   })
+  test('Should return > 0 if any checker return levelRisk > 0', () => {
+    const { sut, checkerStubs } = makeSut()
+    jest.spyOn(checkerStubs[0], 'verifyRisk').mockReturnValueOnce(1)
+    const result = sut.verifyRisk(makeFakeTransaction())
+    expect(result).toBeGreaterThanOrEqual(1)
+  })
 })
