@@ -2,11 +2,11 @@ import request from 'supertest'
 import app from '../app'
 
 describe('Content Type Middleware', () => {
-  test('Should set default content type as json', async () => {
+  test('Should set default content type as json', () => {
     app.get('/test_content_type', (req, res) => {
       res.send('')
     })
-    await request(app)
+    request(app)
       .get('/test_content_type')
       .expect('content-type', /json/)
   })

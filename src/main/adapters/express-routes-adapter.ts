@@ -3,7 +3,7 @@ import { Request, Response } from 'express'
 import { HttpRequest, HttpResponse } from '../../presentation/protocols/http'
 
 export const adaptRoutes = (controller: Controller) => {
-  return async (req: Request, res: Response) => {
+  return (req: Request, res: Response) => {
     const httpRequest: HttpRequest = {
       body: req.body
     }
