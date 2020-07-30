@@ -30,7 +30,7 @@
     "test:staged": "yarn test -- --findRelatedTests",
     "test:integration": "yarn test -- --watch -c jest-integration-config.js",
     "test:ci": "yarn test -- --coverage",
-    "build": "sucrase-node src/main/server.ts"
+    "build": "sucrase-node src/main/main.ts"
   },
   "dependencies": {
     "express": "^4.17.1"
