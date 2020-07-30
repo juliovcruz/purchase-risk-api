@@ -4,7 +4,7 @@ import { RequiredFieldValidation } from '../../presentation/validators/required-
 
 export const makeValidation = (): ValidationComposite => {
   const validations: Validation[] = []
-  const fields = ['id', 'name']
+  const fields = ['id']
 
   for (const field of fields) {
     validations.push(new RequiredFieldValidation(field))

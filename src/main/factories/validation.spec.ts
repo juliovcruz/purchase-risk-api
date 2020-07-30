@@ -9,7 +9,7 @@ describe('Validation Factory', () => {
   test('Should call ValidationComposite with all validations', () => {
     makeValidation()
     const validations: Validation[] = []
-    const fields = ['id', 'name']
+    const fields = ['id']
     for (const field of fields) {
       validations.push(new RequiredFieldValidation(field))
     }
