@@ -34,7 +34,7 @@ const makeRiskCheckerStub = (): RiskChecker => {
       return 0
     }
   }
-  const levelRisk = [0, 1, 2, 3, 4]
+  const levelRisk = [0, 1, 2, 3, 4, 5]
   return new RiskCheckerStub(levelRisk)
 }
 
@@ -88,5 +88,14 @@ describe('TransactionRisk Controller', () => {
         id: 'any_id',
         score: 0
       }]))
+  })
+  test('Should call checkers with all transactions', () => {
+    const { sut, riskCheckerStub } = makeSut()
+    const spyVerify = jest.spyOn(riskCheckerStub, 'verifyRisk')
+    const request = makeFakeRequest()
+    request.body[1].value = 255.6
+    sut.handle(request)
+    expect(spyVerify).toHaveBeenCalledWith(request.body[0])
+    expect(spyVerify).toHaveBeenCalledWith(request.body[1])
   })
 })
