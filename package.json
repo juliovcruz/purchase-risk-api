@@ -5,8 +5,9 @@
   "author": "Julio V. Cruz <juliovcruz0@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^14.0.27",
+    "@types/express": "^4.17.7",
     "@types/jest": "^26.0.7",
+    "@types/node": "^14.0.27",
     "@typescript-eslint/eslint-plugin": "^3.6.0",
     "eslint": "^7.4.0",
     "eslint-config-standard-with-typescript": "^18.0.2",
@@ -21,7 +22,8 @@
     "sucrase": "^3.15.0",
     "ts-jest": "^26.1.4",
     "typescript": "^3.9.7"
-  },"scripts": {
+  },
+  "scripts": {
     "test": "jest --passWithNoTests --silent --runInBand --noStackTrace",
     "test:full": "jest --passWithNoTests --runInBand",
     "test:unit": "yarn test -- --watch -c jest-unit-config.js",
@@ -29,5 +31,8 @@
     "test:integration": "yarn test -- --watch -c jest-integration-config.js",
     "test:ci": "yarn test -- --coverage",
     "build": "sucrase-node src/main/server.ts"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
   }
 }
