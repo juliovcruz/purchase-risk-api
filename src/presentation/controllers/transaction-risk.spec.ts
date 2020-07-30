@@ -2,9 +2,10 @@ import { TransactionRiskController } from './transaction-risk'
 import { RiskChecker } from '../../domain/usecases/protocols/risk-checker'
 import { Validation } from '../protocols/validation'
 import { TransactionModel } from '../../domain/models/transaction'
-import { successRisk } from '../helpers/http-helpers'
+import { successRisk, badRequest } from '../helpers/http-helpers'
 import { CustomerModel } from '../../domain/models/customer'
 import { HttpRequest } from '../protocols/http'
+import { MissingParamError } from '../helpers/errors'
 
 interface SutTypes {
   sut: TransactionRiskController
@@ -100,5 +101,17 @@ describe('TransactionRisk Controller', () => {
     sut.handle(request)
     expect(spyVerify).toHaveBeenCalledWith(request.body[0])
     expect(spyVerify).toHaveBeenCalledWith(request.body[1])
+  })
+  test('Should return 400 if ValidationCustomer returns an error', () => {
+    const { sut, validationCustomerStub } = makeSut()
+    jest.spyOn(validationCustomerStub, 'validate').mockReturnValueOnce(new MissingParamError('any_field'))
+    const httpResponse = sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field')))
+  })
+  test('Should return 400 if ValidationTransaction returns an error', () => {
+    const { sut, validationTransactionStub } = makeSut()
+    jest.spyOn(validationTransactionStub, 'validate').mockReturnValueOnce(new MissingParamError('any_field'))
+    const httpResponse = sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field')))
   })
 })

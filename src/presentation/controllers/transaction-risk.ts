@@ -2,7 +2,7 @@ import { Controller } from '../protocols/controller'
 import { HttpRequest, HttpResponse } from '../protocols/http'
 import { RiskChecker } from '../../domain/usecases/protocols/risk-checker'
 import { Validation } from '../protocols/validation'
-import { successRisk } from '../helpers/http-helpers'
+import { successRisk, badRequest } from '../helpers/http-helpers'
 import { RiskBody } from '../../domain/usecases/protocols/http-risk'
 
 export class TransactionRiskController implements Controller {
@@ -19,6 +19,15 @@ export class TransactionRiskController implements Controller {
   handle (transactions: HttpRequest): HttpResponse {
     const response: RiskBody[] = []
     for (const transaction of transactions.body) {
+      let error = this.validationTransaction.validate(transaction)
+      if (error) {
+        return badRequest(error)
+      }
+      error = this.validationCustomer.validate(transaction.customer)
+      if (error) {
+        return badRequest(error)
+      }
+
       const scoreR = this.riskChecker.verifyRisk(transaction)
       response.push({
         id: transaction.id,
