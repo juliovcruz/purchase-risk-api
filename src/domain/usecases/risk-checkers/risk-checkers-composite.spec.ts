@@ -32,12 +32,18 @@ const makeFakeTransaction = (): TransactionModel => {
 const makeRiskChecker = (): RiskChecker => {
   class RiskCheckerStub implements RiskChecker {
     levelRisk: number[]
+
+    constructor (levelRisk: number[]) {
+      this.levelRisk = levelRisk
+    }
+
     verifyRisk (transaction: TransactionModel): number {
-      return 0
+      return this.levelRisk[0]
     }
   }
+  const levelRisk = [0, 1, 2, 3, 4]
 
-  return new RiskCheckerStub()
+  return new RiskCheckerStub(levelRisk)
 }
 
 const makeSut = (): SutTypes => {
