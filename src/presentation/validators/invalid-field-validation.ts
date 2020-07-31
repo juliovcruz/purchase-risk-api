@@ -8,13 +8,20 @@ export class InvalidFieldValidation implements Validation {
     this.field = field
   }
 
-  validateLocation (input: string, id: string): Error {
-    if (input.indexOf('/') !== 2 || input.length !== 5) {
+  validateLocation (location: string, id: string): Error {
+    if (location.indexOf('/') !== 2 || location.length !== 5) {
       return new InvalidParamError(this.field, id)
     }
   }
 
+  validateValue (value: string, id: string): Error {
+    const number = Number(value)
+    const str = String(number)
+    if (str === 'NaN' || number === 0) return new InvalidParamError(this.field, id)
+  }
+
   validate (input: any): Error {
     if (this.field === 'ip_location' || this.field === 'state') return this.validateLocation(input[this.field], input.id)
+    if (this.field === 'value') return this.validateValue(input[this.field], input.id)
   }
 }
