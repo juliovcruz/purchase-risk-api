@@ -5,6 +5,7 @@
   "author": "Julio V. Cruz <juliovcruz0@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "@types/express": "^4.17.7",
     "@types/jest": "^26.0.7",
     "@types/node": "^14.0.27",
@@ -35,6 +36,7 @@
     "build": "sucrase-node src/main/main.ts"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "express": "^4.17.1"
   }
 }
