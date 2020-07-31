@@ -28,4 +28,14 @@ describe('InvalidField Validation', () => {
     const error = sut.validate({ value: 'ERROR', id: 'any_id' })
     expect(error).toEqual(new InvalidParamError('value', 'any_id'))
   })
+  test('Should return an error if validateDate fails with paid_at', () => {
+    const { sut } = makeSut('paid_at')
+    const error = sut.validate({ paid_at: 'ERR-07-20 15:14:25', id: 'any_id' })
+    expect(error).toEqual(new InvalidParamError('paid_at', 'any_id'))
+  })
+  test('Should return an error if validateDate fails with birth_date', () => {
+    const { sut } = makeSut('birth_date')
+    const error = sut.validate({ birth_date: 'ERR-07-20', id: 'any_id' })
+    expect(error).toEqual(new InvalidParamError('birth_date', 'any_id'))
+  })
 })
