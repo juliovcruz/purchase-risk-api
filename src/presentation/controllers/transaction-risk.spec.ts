@@ -104,14 +104,14 @@ describe('TransactionRisk Controller', () => {
   })
   test('Should return 400 if ValidationCustomer returns an error', () => {
     const { sut, validationCustomerStub } = makeSut()
-    jest.spyOn(validationCustomerStub, 'validate').mockReturnValueOnce(new MissingParamError('any_field'))
+    jest.spyOn(validationCustomerStub, 'validate').mockReturnValueOnce(new MissingParamError('any_field', 'any_id'))
     const httpResponse = sut.handle(makeFakeRequest())
-    expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field')))
+    expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field', 'any_id')))
   })
   test('Should return 400 if ValidationTransaction returns an error', () => {
     const { sut, validationTransactionStub } = makeSut()
-    jest.spyOn(validationTransactionStub, 'validate').mockReturnValueOnce(new MissingParamError('any_field'))
+    jest.spyOn(validationTransactionStub, 'validate').mockReturnValueOnce(new MissingParamError('any_field', 'any_id'))
     const httpResponse = sut.handle(makeFakeRequest())
-    expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field')))
+    expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field', 'any_id')))
   })
 })
