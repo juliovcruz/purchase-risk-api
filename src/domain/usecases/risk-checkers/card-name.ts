@@ -9,9 +9,13 @@ export class CardNameChecker implements RiskChecker {
   }
 
   verifyRisk (transaction: TransactionModel): number {
-    const cardName = transaction.card_hold_name
-    const customerName = transaction.customer.name
-    if (cardName !== customerName) return this.levelRisk[4]
+    const [firstCardName, secondCardName] = transaction.card_hold_name.split(' ')
+    const [firstCustomerName, secondCustomerName] = transaction.customer.name.split(' ')
+    if (firstCardName !== firstCustomerName) {
+      if (secondCardName !== secondCustomerName) return this.levelRisk[4]
+      if (secondCustomerName === undefined || secondCardName === undefined) return this.levelRisk[4]
+      if (secondCardName === secondCustomerName) return this.levelRisk[2]
+    }
     return this.levelRisk[0]
   }
 }
