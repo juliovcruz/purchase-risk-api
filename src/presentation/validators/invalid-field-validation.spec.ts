@@ -13,14 +13,19 @@ const makeSut = (input: string): SutTypes => {
 }
 
 describe('InvalidField Validation', () => {
-  test('Should return an error if validatelocation fails with ip_location', () => {
+  test('Should return an error if validateLocation fails with ip_location', () => {
     const { sut } = makeSut('ip_location')
     const error = sut.validate({ ip_location: 'ERROR', id: 'any_id' })
     expect(error).toEqual(new InvalidParamError('ip_location', 'any_id'))
   })
-  test('Should return an error if validatelocation fails with state', () => {
+  test('Should return an error if validateLocation fails with state', () => {
     const { sut } = makeSut('state')
     const error = sut.validate({ state: 'ERROR', id: 'any_id' })
     expect(error).toEqual(new InvalidParamError('state', 'any_id'))
+  })
+  test('Should return an error if validateValue fails', () => {
+    const { sut } = makeSut('value')
+    const error = sut.validate({ value: 'ERROR', id: 'any_id' })
+    expect(error).toEqual(new InvalidParamError('value', 'any_id'))
   })
 })
