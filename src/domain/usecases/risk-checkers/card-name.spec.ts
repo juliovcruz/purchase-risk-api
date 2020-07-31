@@ -45,4 +45,12 @@ describe('CardName Checker', () => {
     const result = sut.verifyRisk(transaction)
     expect(result).toBe(sut.levelRisk[4])
   })
+  test('Should return levelRisk 2 if only second names is equal', () => {
+    const sut = makeSut()
+    const transaction = makeFakeTransaction()
+    transaction.card_hold_name = 'any_first any_second'
+    transaction.customer.name = 'other_first any_second'
+    const result = sut.verifyRisk(transaction)
+    expect(result).toBe(sut.levelRisk[2])
+  })
 })
