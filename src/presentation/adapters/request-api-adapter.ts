@@ -5,11 +5,7 @@ export class RequestApiAdapter implements RequestApi {
   request (url: string): any {
     axios.get(url)
       .then((response) => {
-        console.log(response.data)
-        console.log(response.status)
-        console.log(response.statusText)
-        console.log(response.headers)
-        console.log(response.config)
+        return response
       })
   }
 }
