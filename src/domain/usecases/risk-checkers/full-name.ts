@@ -19,6 +19,6 @@ export class FullNameChecker implements RiskChecker {
     const secondNameCustomer = transaction.customer.name.split(' ')[1]
     if (this.verifySecondNameEmpty(secondNameCard)) return this.levelRisk[3]
     if (this.verifySecondNameEmpty(secondNameCustomer)) return this.levelRisk[3]
-    return 0
+    return this.levelRisk[0]
   }
 }
