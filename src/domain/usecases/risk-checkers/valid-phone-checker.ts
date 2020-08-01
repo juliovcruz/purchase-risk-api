@@ -15,7 +15,7 @@ export class ValidPhoneChecker implements RiskChecker {
     const valid = await this.phoneValidator.isValid(transaction.customer.phone).then(response => {
       return response
     })
-    console.log(valid)
+    if (!valid) return this.levelRisk[4]
     return this.levelRisk[0]
   }
 }
