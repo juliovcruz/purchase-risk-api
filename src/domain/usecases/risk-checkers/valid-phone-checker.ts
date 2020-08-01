@@ -12,9 +12,14 @@ export class ValidPhoneChecker implements RiskChecker {
   }
 
   async verifyRisk (transaction: TransactionModel): Promise<number> {
-    const valid = await this.phoneValidator.isValid(transaction.customer.phone).then(response => {
-      return response
-    })
+    let valid: boolean
+    try {
+      valid = await this.phoneValidator.isValid(transaction.customer.phone).then(response => {
+        return response
+      })
+    } catch (e) {
+      return this.levelRisk[1]
+    }
     if (!valid) return this.levelRisk[4]
     return this.levelRisk[0]
   }
