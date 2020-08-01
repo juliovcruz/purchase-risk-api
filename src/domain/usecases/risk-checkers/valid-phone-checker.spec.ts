@@ -64,4 +64,12 @@ describe('ValidPhone Checker', () => {
     const result = await sut.verifyRisk(transaction)
     expect(result).toBe(sut.levelRisk[0])
   })
+  test('Should return levelRisk 4 if phoneValidator return false', async () => {
+    const { sut, phoneValidatorStub } = makeSut()
+    jest.spyOn(phoneValidatorStub, 'isValid').mockReturnValueOnce(new Promise(resolve => resolve(false)))
+    const transaction = makeFakeTransaction()
+    transaction.customer.phone = 'any_phone'
+    const result = await sut.verifyRisk(transaction)
+    expect(result).toBe(sut.levelRisk[4])
+  })
 })
