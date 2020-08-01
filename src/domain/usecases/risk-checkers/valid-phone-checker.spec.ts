@@ -57,4 +57,11 @@ describe('ValidPhone Checker', () => {
     await sut.verifyRisk(transaction)
     expect(validSpy).toHaveBeenCalledWith('any_phone')
   })
+  test('Should return levelRisk 0 if phoneValidator return true', async () => {
+    const { sut } = makeSut()
+    const transaction = makeFakeTransaction()
+    transaction.customer.phone = 'any_phone'
+    const result = await sut.verifyRisk(transaction)
+    expect(result).toBe(sut.levelRisk[0])
+  })
 })
