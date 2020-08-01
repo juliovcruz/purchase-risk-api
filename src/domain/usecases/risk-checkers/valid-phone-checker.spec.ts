@@ -60,7 +60,6 @@ describe('ValidPhone Checker', () => {
   test('Should return levelRisk 0 if phoneValidator return true', async () => {
     const { sut } = makeSut()
     const transaction = makeFakeTransaction()
-    transaction.customer.phone = 'any_phone'
     const result = await sut.verifyRisk(transaction)
     expect(result).toBe(sut.levelRisk[0])
   })
@@ -68,8 +67,16 @@ describe('ValidPhone Checker', () => {
     const { sut, phoneValidatorStub } = makeSut()
     jest.spyOn(phoneValidatorStub, 'isValid').mockReturnValueOnce(new Promise(resolve => resolve(false)))
     const transaction = makeFakeTransaction()
-    transaction.customer.phone = 'any_phone'
     const result = await sut.verifyRisk(transaction)
     expect(result).toBe(sut.levelRisk[4])
+  })
+  test('Should return levelRisk 1 if phoneValidator throws', async () => {
+    const { sut, phoneValidatorStub } = makeSut()
+    jest.spyOn(phoneValidatorStub, 'isValid').mockImplementationOnce((): any => {
+      return new Error()
+    })
+    const transaction = makeFakeTransaction()
+    const result = await sut.verifyRisk(transaction)
+    expect(result).toBe(sut.levelRisk[1])
   })
 })
