@@ -29,7 +29,7 @@ const makeSut = (): SutTypes => {
 describe('PhoneValidator Adapter', () => {
   test('Should return true if requestApi return valid', async () => {
     const { sut } = makeSut()
-    const result = await sut.isValid('202-555-0108')
+    const result = await sut.isValid('any_phone')
     expect(result).toBe(true)
   })
   test('Should return false if requestApi return invalid', async () => {
@@ -37,7 +37,13 @@ describe('PhoneValidator Adapter', () => {
     jest.spyOn(requestApiStub, 'request').mockReturnValueOnce(new Promise(resolve => resolve({
       valid: false
     })))
-    const result = await sut.isValid('202-555-0108')
+    const result = await sut.isValid('any_phone')
     expect(result).toBe(false)
+  })
+  test('Should call urlPhone with correct phone', async () => {
+    const { sut } = makeSut()
+    const spyUrlPhone = jest.spyOn(sut, 'urlPhone')
+    await sut.isValid('any_phone')
+    expect(spyUrlPhone).toHaveBeenCalledWith('any_phone')
   })
 })
