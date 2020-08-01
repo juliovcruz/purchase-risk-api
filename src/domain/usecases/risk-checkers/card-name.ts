@@ -8,7 +8,7 @@ export class CardNameChecker implements RiskChecker {
     this.levelRisk = levelRisk
   }
 
-  verifyRisk (transaction: TransactionModel): number {
+  async verifyRisk (transaction: TransactionModel): Promise<number> {
     const [firstCardName, secondCardName] = transaction.card_hold_name.split(' ')
     const [firstCustomerName, secondCustomerName] = transaction.customer.name.split(' ')
     if (firstCardName !== firstCustomerName) {

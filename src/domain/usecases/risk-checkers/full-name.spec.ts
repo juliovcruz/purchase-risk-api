@@ -29,24 +29,24 @@ const makeFakeTransaction = (): TransactionModel => {
 }
 
 describe('FullName Checker', () => {
-  test('Should return levelRisk 0 if full name is provided', () => {
+  test('Should return levelRisk 0 if full name is provided', async () => {
     const sut = makeSut()
     const transaction = makeFakeTransaction()
-    const result = sut.verifyRisk(transaction)
+    const result = await sut.verifyRisk(transaction)
     expect(result).toBe(sut.levelRisk[0])
   })
-  test('Should return levelRisk 3 if only first name is provided in transaction', () => {
+  test('Should return levelRisk 3 if only first name is provided in transaction', async () => {
     const sut = makeSut()
     const transaction = makeFakeTransaction()
     transaction.card_hold_name = 'Ashlee'
-    const result = sut.verifyRisk(transaction)
+    const result = await sut.verifyRisk(transaction)
     expect(result).toBe(sut.levelRisk[3])
   })
-  test('Should return levelRisk 3 if only first name is provided in customer', () => {
+  test('Should return levelRisk 3 if only first name is provided in customer', async () => {
     const sut = makeSut()
     const transaction = makeFakeTransaction()
     transaction.customer.name = 'Ashlee '
-    const result = sut.verifyRisk(transaction)
+    const result = await sut.verifyRisk(transaction)
     expect(result).toBe(sut.levelRisk[3])
   })
 })

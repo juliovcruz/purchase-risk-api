@@ -8,7 +8,7 @@ export class LocationChecker implements RiskChecker {
     this.levelRisk = values
   }
 
-  verifyRisk (transaction: TransactionModel): number {
+  async verifyRisk (transaction: TransactionModel): Promise<number> {
     const [stateTransaction, countryTransaction] = transaction.ip_location.split('/')
     const [stateConstumer, countryConsumer] = transaction.customer.state.split('/')
     if (countryTransaction !== countryConsumer) return this.levelRisk[5]

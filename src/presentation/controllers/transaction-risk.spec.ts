@@ -34,7 +34,7 @@ const makeRiskCheckerStub = (): RiskChecker => {
       this.levelRisk = levelRisk
     }
 
-    verifyRisk (transaction: TransactionModel): number {
+    async verifyRisk (transaction: TransactionModel): Promise<number> {
       return 0
     }
   }
@@ -79,10 +79,10 @@ const makeFakeTransaction = (): TransactionModel => {
 }
 
 describe('TransactionRisk Controller', () => {
-  test('Should return 200 and score 0 if all checkers return 0', () => {
+  test('Should return 200 and score 0 if all checkers return 0', async () => {
     const { sut } = makeSut()
     const request = makeFakeRequest()
-    const result = sut.handle(request)
+    const result = await sut.handle(request)
     expect(result).toEqual(successRisk([
       {
         id: 'any_id',
@@ -93,25 +93,25 @@ describe('TransactionRisk Controller', () => {
         score: 0
       }]))
   })
-  test('Should call checkers with all transactions', () => {
+  test('Should call checkers with all transactions', async () => {
     const { sut, riskCheckerStub } = makeSut()
     const spyVerify = jest.spyOn(riskCheckerStub, 'verifyRisk')
     const request = makeFakeRequest()
     request.body[1].value = 255.6
-    sut.handle(request)
+    await sut.handle(request)
     expect(spyVerify).toHaveBeenCalledWith(request.body[0])
     expect(spyVerify).toHaveBeenCalledWith(request.body[1])
   })
-  test('Should return 400 if ValidationCustomer returns an error', () => {
+  test('Should return 400 if ValidationCustomer returns an error', async () => {
     const { sut, validationCustomerStub } = makeSut()
     jest.spyOn(validationCustomerStub, 'validate').mockReturnValueOnce(new MissingParamError('any_field', 'any_id'))
-    const httpResponse = sut.handle(makeFakeRequest())
+    const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field', 'any_id')))
   })
-  test('Should return 400 if ValidationTransaction returns an error', () => {
+  test('Should return 400 if ValidationTransaction returns an error', async () => {
     const { sut, validationTransactionStub } = makeSut()
     jest.spyOn(validationTransactionStub, 'validate').mockReturnValueOnce(new MissingParamError('any_field', 'any_id'))
-    const httpResponse = sut.handle(makeFakeRequest())
+    const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field', 'any_id')))
   })
 })

@@ -29,28 +29,28 @@ const makeSut = (): CardNameChecker => {
 }
 
 describe('CardName Checker', () => {
-  test('Should return levelRisk 0 if card name and customer name is equal', () => {
+  test('Should return levelRisk 0 if card name and customer name is equal', async () => {
     const sut = makeSut()
     const transaction = makeFakeTransaction()
     transaction.card_hold_name = 'any_name'
     transaction.customer.name = 'any_name'
-    const result = sut.verifyRisk(transaction)
+    const result = await sut.verifyRisk(transaction)
     expect(result).toBe(sut.levelRisk[0])
   })
-  test('Should return levelRisk 4 if card name and customer name is different', () => {
+  test('Should return levelRisk 4 if card name and customer name is different', async () => {
     const sut = makeSut()
     const transaction = makeFakeTransaction()
     transaction.card_hold_name = 'any_name'
     transaction.customer.name = 'another_name'
-    const result = sut.verifyRisk(transaction)
+    const result = await sut.verifyRisk(transaction)
     expect(result).toBe(sut.levelRisk[4])
   })
-  test('Should return levelRisk 2 if only second names is equal', () => {
+  test('Should return levelRisk 2 if only second names is equal', async () => {
     const sut = makeSut()
     const transaction = makeFakeTransaction()
     transaction.card_hold_name = 'any_first any_second'
     transaction.customer.name = 'other_first any_second'
-    const result = sut.verifyRisk(transaction)
+    const result = await sut.verifyRisk(transaction)
     expect(result).toBe(sut.levelRisk[2])
   })
 })

@@ -29,42 +29,42 @@ const makeSut = (): PhoneDDDChecker => {
 }
 
 describe('PhoneDDD Checker', () => {
-  test('Should return levelRisk 0 if phone DDD is compatible with all locations', () => {
+  test('Should return levelRisk 0 if phone DDD is compatible with all locations', async () => {
     const sut = makeSut()
     const transaction = makeFakeTransaction()
-    const result = sut.verifyRisk(transaction)
+    const result = await sut.verifyRisk(transaction)
     expect(result).toBe(sut.levelRisk[0])
   })
-  test('Should return levelRisk 2 if phone DDD is not compatible with consumer location', () => {
+  test('Should return levelRisk 2 if phone DDD is not compatible with consumer location', async () => {
     const sut = makeSut()
     const transaction = makeFakeTransaction()
     transaction.ip_location = 'GO/BR'
     transaction.customer.phone = '62 99999-9999'
-    const result = sut.verifyRisk(transaction)
+    const result = await sut.verifyRisk(transaction)
     expect(result).toBe(sut.levelRisk[2])
   })
-  test('Should return levelRisk 2 if phone DDD is not compatible with transaction location', () => {
+  test('Should return levelRisk 2 if phone DDD is not compatible with transaction location', async () => {
     const sut = makeSut()
     const transaction = makeFakeTransaction()
     transaction.customer.state = 'SP/BR'
     transaction.customer.phone = '12 99999-9999'
-    const result = sut.verifyRisk(transaction)
+    const result = await sut.verifyRisk(transaction)
     expect(result).toBe(sut.levelRisk[2])
   })
-  test('Should return levelRisk 5 if phone DDD is invalid', () => {
+  test('Should return levelRisk 5 if phone DDD is invalid', async () => {
     const sut = makeSut()
     const transaction = makeFakeTransaction()
     transaction.customer.phone = '0 99999-9999'
-    const result = sut.verifyRisk(transaction)
+    const result = await sut.verifyRisk(transaction)
     expect(result).toBe(sut.levelRisk[5])
   })
-  test('Should return levelRisk 4 if phone DDD is not compatible with all locations', () => {
+  test('Should return levelRisk 4 if phone DDD is not compatible with all locations', async () => {
     const sut = makeSut()
     const transaction = makeFakeTransaction()
     transaction.customer.state = 'AM/BR'
     transaction.ip_location = 'RO/BR'
     transaction.customer.phone = '24 99999-9999'
-    const result = sut.verifyRisk(transaction)
+    const result = await sut.verifyRisk(transaction)
     expect(result).toBe(sut.levelRisk[4])
   })
 })

@@ -16,7 +16,7 @@ export class TransactionRiskController implements Controller {
     this.validationTransaction = validationTransaction
   }
 
-  handle (transactions: HttpRequest): HttpResponse {
+  async handle (transactions: HttpRequest): Promise<HttpResponse> {
     try {
       const response: RiskBody[] = []
       for (const transaction of transactions.body) {
@@ -28,7 +28,7 @@ export class TransactionRiskController implements Controller {
         if (error) {
           return badRequest(error)
         }
-        const scoreR = this.riskChecker.verifyRisk(transaction)
+        const scoreR = await this.riskChecker.verifyRisk(transaction)
         response.push({
           id: transaction.id,
           score: scoreR

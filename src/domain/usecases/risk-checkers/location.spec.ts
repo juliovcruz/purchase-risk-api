@@ -29,24 +29,24 @@ const makeSut = (): LocationChecker => {
 }
 
 describe('Location Checker', () => {
-  test('Should return levelRisk 0 if location and state is equal', () => {
+  test('Should return levelRisk 0 if location and state is equal', async () => {
     const sut = makeSut()
     const transaction = makeFakeTransaction()
-    const result = sut.verifyRisk(transaction)
+    const result = await sut.verifyRisk(transaction)
     expect(result).toBe(sut.levelRisk[0])
   })
-  test('Should return levelRisk 5 if country is different', () => {
+  test('Should return levelRisk 5 if country is different', async () => {
     const sut = makeSut()
     const transaction = makeFakeTransaction()
     transaction.customer.state = 'RJ/US'
-    const result = sut.verifyRisk(transaction)
+    const result = await sut.verifyRisk(transaction)
     expect(result).toBe(sut.levelRisk[5])
   })
-  test('Should return levelRisk 1 if country is equal and state is different', () => {
+  test('Should return levelRisk 1 if country is equal and state is different', async () => {
     const sut = makeSut()
     const transaction = makeFakeTransaction()
     transaction.customer.state = 'GO/BR'
-    const result = sut.verifyRisk(transaction)
+    const result = await sut.verifyRisk(transaction)
     expect(result).toBe(sut.levelRisk[1])
   })
 })

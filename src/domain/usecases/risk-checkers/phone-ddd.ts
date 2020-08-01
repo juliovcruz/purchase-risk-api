@@ -42,7 +42,7 @@ export class PhoneDDDChecker implements RiskChecker {
     this.levelRisk = levelRisk
   }
 
-  verifyRisk (transaction: TransactionModel): number {
+  async verifyRisk (transaction: TransactionModel): Promise<number> {
     const stateTransaction = transaction.ip_location.split('/')[0]
     const stateCostumer = transaction.customer.state.split('/')[0]
     const phoneDDD = Number(transaction.customer.phone.split(' ')[0])

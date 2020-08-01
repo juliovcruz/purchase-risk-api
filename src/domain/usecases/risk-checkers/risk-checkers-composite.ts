@@ -9,10 +9,10 @@ export class RiskCheckerComposite implements RiskChecker {
     this.checkers = checkers
   }
 
-  verifyRisk (transaction: TransactionModel): number {
+  async verifyRisk (transaction: TransactionModel): Promise<number> {
     let scoreRisk: number = 0
     for (const checker of this.checkers) {
-      const checkerRisk = checker.verifyRisk(transaction)
+      const checkerRisk = await checker.verifyRisk(transaction)
       scoreRisk += checkerRisk
     }
     if (scoreRisk > 100) scoreRisk = 100

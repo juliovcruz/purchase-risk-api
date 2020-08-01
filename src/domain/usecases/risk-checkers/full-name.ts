@@ -14,7 +14,7 @@ export class FullNameChecker implements RiskChecker {
     return false
   }
 
-  verifyRisk (transaction: TransactionModel): number {
+  async verifyRisk (transaction: TransactionModel): Promise<number> {
     const secondNameCard = transaction.card_hold_name.split(' ')[1]
     const secondNameCustomer = transaction.customer.name.split(' ')[1]
     if (this.verifySecondNameEmpty(secondNameCard)) return this.levelRisk[3]
