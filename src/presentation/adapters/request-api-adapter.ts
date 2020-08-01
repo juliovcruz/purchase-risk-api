@@ -3,9 +3,9 @@ import { RequestApi } from '../protocols/request-api'
 
 export class RequestApiAdapter implements RequestApi {
   request (url: string): any {
-    axios.get(url)
+    return axios.get(url)
       .then((response) => {
-        return response
+        return response.data
       })
   }
 }
