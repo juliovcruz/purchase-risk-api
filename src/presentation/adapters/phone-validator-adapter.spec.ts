@@ -32,4 +32,12 @@ describe('PhoneValidator Adapter', () => {
     const result = await sut.isValid('202-555-0108')
     expect(result).toBe(true)
   })
+  test('Should return false if requestApi return invalid', async () => {
+    const { sut, requestApiStub } = makeSut()
+    jest.spyOn(requestApiStub, 'request').mockReturnValueOnce(new Promise(resolve => resolve({
+      valid: false
+    })))
+    const result = await sut.isValid('202-555-0108')
+    expect(result).toBe(false)
+  })
 })
