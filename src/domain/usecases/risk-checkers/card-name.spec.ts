@@ -32,8 +32,8 @@ describe('CardName Checker', () => {
   test('Should return levelRisk 0 if card name and customer name is equal', async () => {
     const sut = makeSut()
     const transaction = makeFakeTransaction()
-    transaction.card_hold_name = 'any_name'
-    transaction.customer.name = 'any_name'
+    transaction.card_hold_name = 'any_name any_name'
+    transaction.customer.name = 'any_name any_name'
     const result = await sut.verifyRisk(transaction)
     expect(result).toBe(sut.levelRisk[0])
   })
@@ -45,15 +45,15 @@ describe('CardName Checker', () => {
     const result = await sut.verifyRisk(transaction)
     expect(result).toBe(sut.levelRisk[4])
   })
-  test('Should return levelRisk 2 if only second names is equal', async () => {
+  test('Should return levelRisk 2 if more of half of names is equal', async () => {
     const sut = makeSut()
     const transaction = makeFakeTransaction()
-    transaction.card_hold_name = 'any_first any_second'
-    transaction.customer.name = 'other_first any_second'
+    transaction.card_hold_name = 'any_first any_second any_third'
+    transaction.customer.name = 'other_first any_second any_third'
     const result = await sut.verifyRisk(transaction)
     expect(result).toBe(sut.levelRisk[2])
   })
-  test('Should return levelRisk 2 if only first names is equal', async () => {
+  test('Should return levelRisk 2 if only one name is equal', async () => {
     const sut = makeSut()
     const transaction = makeFakeTransaction()
     transaction.card_hold_name = 'any_first any_second'
