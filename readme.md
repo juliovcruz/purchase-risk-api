@@ -54,8 +54,10 @@ Com os dois já instalados, basta seguir o passo a passo em ordem:
 ### Comandos
 
 > yarn build - (Inicia o servidor)
-yarn test - (Inicia todos os testes do projeto)
-yarn test:ci - (Inicia todos os testes e gera a pasta coverage)
+
+> yarn test - (Inicia todos os testes do projeto)
+
+> yarn test:ci - (Inicia todos os testes e gera a pasta coverage)
 
 ## Tecnologias utilizadas
 
