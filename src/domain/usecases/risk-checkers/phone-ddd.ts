@@ -26,7 +26,6 @@ export class PhoneDDDChecker implements RiskChecker {
     const phoneDDD = transaction.customer.phone.split(' ')[0]
     const isValidTransactionDDD = this.isValidStateDDD(phoneDDD, stateCostumer)
     const isValidCustomerDDD = this.isValidStateDDD(phoneDDD, stateTransaction)
-    console.log(stateTransaction, stateCostumer, phoneDDD, isValidCustomerDDD, isValidTransactionDDD)
     if (isValidTransactionDDD === null && isValidCustomerDDD === null) return this.levelRisk[5]
     if (!isValidTransactionDDD && !isValidCustomerDDD) return this.levelRisk[4]
     if (isValidTransactionDDD && !isValidCustomerDDD) return this.levelRisk[2]
