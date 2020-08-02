@@ -1,27 +1,5 @@
 import { LocationChecker } from './location'
-import { TransactionModel } from '../../models/transaction'
-import { CustomerModel } from '../../models/customer'
-
-const makeFakeCustomer = (): CustomerModel => {
-  return {
-    id: 'any_id',
-    name: 'any_name',
-    birth_date: 'any_birth_date',
-    state: 'RJ/BR',
-    phone: 'any_phone'
-  }
-}
-
-const makeFakeTransaction = (): TransactionModel => {
-  return {
-    id: 'any_id',
-    value: 10,
-    paid_at: 'any_date',
-    ip_location: 'RJ/BR',
-    card_hold_name: 'any_card_hold_name',
-    customer: makeFakeCustomer()
-  }
-}
+import { makeFakeTransaction } from '../../tests/mock-models'
 
 const makeSut = (): LocationChecker => {
   const levelRisk = [0, 1, 2, 3, 4, 5]

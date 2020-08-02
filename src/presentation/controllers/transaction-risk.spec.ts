@@ -3,7 +3,7 @@ import { RiskChecker } from '../../domain/usecases/protocols/risk-checker'
 import { Validation } from '../protocols/validation'
 import { TransactionModel } from '../../domain/models/transaction'
 import { successRisk, badRequest } from '../helpers/http-helpers'
-import { CustomerModel } from '../../domain/models/customer'
+import { makeFakeTransaction } from '../../domain/tests/mock-models'
 import { HttpRequest } from '../protocols/http'
 import { MissingParamError } from '../helpers/errors'
 
@@ -54,27 +54,6 @@ const makeValidationStub = (): Validation => {
 const makeFakeRequest = (): HttpRequest => {
   return {
     body: [makeFakeTransaction(), makeFakeTransaction()]
-  }
-}
-
-const makeFakeCustomer = (): CustomerModel => {
-  return {
-    id: 'any_id',
-    name: 'any_name',
-    birth_date: 'any_birth_date',
-    state: 'RJ/BR',
-    phone: 'any_phone'
-  }
-}
-
-const makeFakeTransaction = (): TransactionModel => {
-  return {
-    id: 'any_id',
-    value: 10,
-    paid_at: 'any_date',
-    ip_location: 'RJ/BR',
-    card_hold_name: 'any_card_hold_name',
-    customer: makeFakeCustomer()
   }
 }
 
