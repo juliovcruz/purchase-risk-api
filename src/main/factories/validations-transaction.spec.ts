@@ -13,6 +13,7 @@ describe('ValidationTransaction Factory', () => {
     const fields = ['id', 'value', 'paid_at', 'ip_location', 'card_hold_name', 'customer']
     for (const field of fields) {
       validations.push(new RequiredFieldValidation(field))
+      validations.push(new InvalidFieldValidation(field))
     }
     validations.push(new InvalidFieldValidation('ip_location'))
     expect(ValidationComposite).toHaveBeenCalledWith(validations)

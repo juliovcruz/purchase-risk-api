@@ -9,6 +9,7 @@ export const makeValidationTransaction = (): ValidationComposite => {
 
   for (const field of fields) {
     validations.push(new RequiredFieldValidation(field))
+    validations.push(new InvalidFieldValidation(field))
   }
   validations.push(new InvalidFieldValidation('ip_location'))
 

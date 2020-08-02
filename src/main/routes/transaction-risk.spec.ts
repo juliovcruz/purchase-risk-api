@@ -8,13 +8,13 @@ describe('TransactionRisk Routes', () => {
       .send([{
         id: 'any_id',
         value: 10,
-        paid_at: 'any_date',
+        paid_at: '2020-07-21 15:14:25',
         ip_location: 'RJ/BR',
         card_hold_name: 'any_card_hold_name',
         customer: {
           id: 'any_id',
           name: 'any_name',
-          birth_date: 'any_birth_date',
+          birth_date: '1992-08-02',
           state: 'RJ/BR',
           phone: '24 99999-9999'
         }
