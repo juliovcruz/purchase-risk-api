@@ -38,4 +38,14 @@ describe('InvalidField Validation', () => {
     const error = sut.validate({ birth_date: 'ERR-07-20', id: 'any_id' })
     expect(error).toEqual(new InvalidParamError('birth_date', 'any_id'))
   })
+  test('Should return an error if validateDate fails with date invalid size', () => {
+    const { sut } = makeSut('birth_date')
+    const error = sut.validate({ birth_date: 'ERR-07-20-50', id: 'any_id' })
+    expect(error).toEqual(new InvalidParamError('birth_date', 'any_id'))
+  })
+  test('Should return an error if validateDate fails with date number size', () => {
+    const { sut } = makeSut('birth_date')
+    const error = sut.validate({ birth_date: '20011-07-20', id: 'any_id' })
+    expect(error).toEqual(new InvalidParamError('birth_date', 'any_id'))
+  })
 })
