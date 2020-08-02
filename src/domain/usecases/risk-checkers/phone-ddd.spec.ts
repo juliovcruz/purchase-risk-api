@@ -69,8 +69,9 @@ describe('PhoneDDD Checker', () => {
   test('Should verifyStateDDD returns correct values', async () => {
     const sut = makeSut()
     const dddDict = {
+      11: 'SP',
       17: 'SP',
-      23: 'RJ',
+      24: 'RJ',
       28: 'ES',
       37: 'MG',
       44: 'PR',
@@ -98,8 +99,8 @@ describe('PhoneDDD Checker', () => {
       99: 'MA'
     }
     Object.entries(dddDict).forEach(ddd => {
-      const result = sut.verifyStateDDD(Number(ddd[0]))
-      expect(result).toEqual(ddd[1])
+      const result = sut.isValidStateDDD(ddd[0], ddd[1])
+      expect(result).toEqual(true)
     })
   })
 })
