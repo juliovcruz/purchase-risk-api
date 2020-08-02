@@ -16,6 +16,9 @@ export class CardNameChecker implements RiskChecker {
       if (secondCustomerName === undefined || secondCardName === undefined) return this.levelRisk[4]
       if (secondCardName === secondCustomerName) return this.levelRisk[2]
     }
+    if (firstCardName === firstCustomerName) {
+      if (secondCardName !== secondCustomerName) return this.levelRisk[2]
+    }
     return this.levelRisk[0]
   }
 }
