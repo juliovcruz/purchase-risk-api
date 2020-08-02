@@ -1,7 +1,6 @@
 import { PhoneDDDChecker } from './phone-ddd'
 import { TransactionModel } from '../../models/transaction'
 import { CustomerModel } from '../../models/customer'
-
 const makeFakeCustomer = (): CustomerModel => {
   return {
     id: 'any_id',
@@ -66,5 +65,41 @@ describe('PhoneDDD Checker', () => {
     transaction.customer.phone = '24 99999-9999'
     const result = await sut.verifyRisk(transaction)
     expect(result).toBe(sut.levelRisk[4])
+  })
+  test('Should verifyStateDDD returns correct values', async () => {
+    const sut = makeSut()
+    const dddDict = {
+      17: 'SP',
+      23: 'RJ',
+      28: 'ES',
+      37: 'MG',
+      44: 'PR',
+      48: 'SC',
+      53: 'RS',
+      61: 'DF',
+      64: 'GO',
+      63: 'TO',
+      66: 'MT',
+      67: 'MS',
+      68: 'AC',
+      69: 'RO',
+      75: 'BA',
+      79: 'SE',
+      81: 'PE',
+      83: 'PB',
+      84: 'RN',
+      88: 'CE',
+      86: 'PI',
+      87: 'PE',
+      97: 'AM',
+      94: 'PA',
+      95: 'RR',
+      96: 'AP',
+      99: 'MA'
+    }
+    Object.entries(dddDict).forEach(ddd => {
+      const result = sut.verifyStateDDD(Number(ddd[0]))
+      expect(result).toEqual(ddd[1])
+    })
   })
 })
