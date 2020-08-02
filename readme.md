@@ -73,7 +73,7 @@ yarn test:ci - (Inicia todos os testes e gera a pasta coverage)
 
 A criação deste projeto foi bem desafiadora para mim, desenvolvi utilizando alguns conceitos de programação , padrões de projeto e frameworks que eu nunca havia utilizado anteriormente, como o axios que foi um pouco complicado para implementar do jeito que eu queria, porém felizmente obtive sucesso. A minha principal intenção era respeitar todos os conceitos do SOLID, para isso foi utilizado alguns padrões de projeto, assim tornando o código bem estruturado, independente e fácil de ser testado, durante toda a implementação foi pensado em testes, então há testes unitários garantindo todas as funcionalidades da API.
 
-Ao receber uma requisição, a API verifica os dados recebidos utilizando métodos verificadores de risco (RiskCheckers), então ela calcula uma pontuação de risco e responde com o resultado, toda as pontuções são configuráveis no método factory do RiskChecker (src/main/config/score-level-risk), também foi implementado alguns validadores, eles garantem que a requisição seja realizada com todos os paramêtros e que estejam da forma esperada, se houver falha em algum validador a API retornará o erro encontrado.
+Ao receber uma requisição, a API verifica os dados recebidos utilizando métodos verificadores de risco (RiskCheckers), então ela calcula uma pontuação de risco e responde com o resultado, todas as pontuações são configuráveis em (src/main/config/score-level-risk), também foi implementado alguns validadores, eles garantem que a requisição seja realizada com todos os paramêtros e que estejam da forma esperada, se houver falha em algum validador a API retornará o erro encontrado.
 
 ### RiskCheckers
 
