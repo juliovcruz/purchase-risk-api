@@ -46,4 +46,12 @@ describe('PhoneValidator Adapter', () => {
     await sut.isValid('any_phone')
     expect(spyUrlPhone).toHaveBeenCalledWith('any_phone')
   })
+  test('Should return true if requestApi return unexpected value', async () => {
+    const { sut, requestApiStub } = makeSut()
+    jest.spyOn(requestApiStub, 'request').mockReturnValueOnce(new Promise(resolve => resolve({
+      any_field: false
+    })))
+    const result = await sut.isValid('any_phone')
+    expect(result).toBe(true)
+  })
 })
