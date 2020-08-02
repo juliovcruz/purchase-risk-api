@@ -30,7 +30,7 @@
     "test:full": "jest --passWithNoTests --runInBand",
     "test:watch": "yarn test -- --watch",
     "test:ci": "yarn test -- --coverage",
-    "build": "sucrase-node src/main/main.ts"
+    "start": "sucrase-node src/main/main.ts"
   },
   "dependencies": {
     "axios": "^0.19.2",
