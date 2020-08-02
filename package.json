@@ -28,7 +28,7 @@
   "scripts": {
     "test": "jest --passWithNoTests --silent --runInBand --noStackTrace",
     "test:full": "jest --passWithNoTests --runInBand",
-    "test:unit": "yarn test -- --watch -c jest-unit-config.js",
+    "test:watch": "yarn test -- --watch",
     "test:ci": "yarn test -- --coverage",
     "build": "sucrase-node src/main/main.ts"
   },
