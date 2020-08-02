@@ -12,14 +12,11 @@ export class CardNameChecker implements RiskChecker {
     const cardName = transaction.card_hold_name.split(' ')
     const customerName = transaction.customer.name.split(' ')
     let flag = 0
-    for (let iCard = 0; iCard < cardName.length; iCard++) {
-      for (let iCustomer = 0; iCustomer < customerName.length; iCustomer++) {
-        if (cardName[iCard] !== customerName[iCustomer]) flag++
-      }
+    for (let i = 0; i < cardName.length && i < customerName.length; i++) {
+      if (cardName[i] !== customerName[i]) flag++
     }
     if (flag === cardName.length || flag === customerName.length) return this.levelRisk[4]
-    if (flag === 1) return this.levelRisk[2]
-    if (flag >= cardName.length / 2) return this.levelRisk[2]
+    if (flag > 0) return this.levelRisk[2]
     return this.levelRisk[0]
   }
 }
