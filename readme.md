@@ -1,6 +1,6 @@
 # Purchase Risk Api
 
-Projeto participante do UpChallenge, desafio técnico da Upnid, se consiste em um API que avalia uma transação de e-commerce e retorna um score de 0 a 100 de risco.
+Purchase Risk API é um pequeno projeto que se consiste em um API que avalia uma transação de e-commerce e retorna um score de 0 a 100 de risco.
 A API recebe uma requisição HTTP do tipo POST contendo um array de transações e retorna um novo array contendo a chave e o score resultante.
 
 Exemplo de requisição:
